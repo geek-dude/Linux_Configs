@@ -1,0 +1,12 @@
+#!/bin/sh
+alias rm='rm -i'
+#alias update='. update.sh'
+#alias gpgpusim='. gpgpusim.sh'
+#alias morning_chrome='morning_chrome.sh &'
+#alias good_morning='morning_chrome.sh & . update.sh'
+#alias minify='. minify.sh'
+# alias ls='lsd'
+alias ll='ls -al'
+alias la='ls -A'
+alias llvm_setup_environment='. llvm_setup_environment.sh'
+alias vim='nvim'
