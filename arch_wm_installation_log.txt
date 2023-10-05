@@ -1,0 +1,88 @@
+Setup timezone in installation medium
+base package installed with pacstrap
+Initial install in chroot
+	linux optional for base
+	linux-firmware optional for linux
+	networmanager (Enable NetworkManager with sytemctl)
+	neovim (You can install this later if not using lvm)
+	lvm2 (Incase of using lvm. Also re-generate initramfs)
+	Setup root password
+	grub
+	efibootmgr optional for grub
+	os-prober optional for grub
+    If installing grub to a removable media then add the --removable flag to grub-install and don't use the --bootloader-id option. If you want to boot something else in the future then you can rename the current boot folder to something else and rename the folder that you want to boot as 'boot'.
+Normal install (Without chroot but before installing any graphical environment)
+	Connect to the internet
+	Setup time zone and generate adjtime
+	Install nvim if not installed before
+	Setup system locales
+	Setup hostname and the local network file
+	Restart
+	bash-completion optional for bash (requires restart to work)
+	man-db
+	sudo
+	Setup new adming user (wheel group)
+	intel-ucode (regenerate grub configuration)
+	Restart (login to the new user account and lock root password)
+	polkit (Usually gets installed with networkmanager if so mark it as explicitly installed)
+System info
+	neofetch
+System monitor
+	htop
+Setting up a few things to make mounting partitions and taking backup easier
+	ntfs-3g
+	udisks2
+	rsync
+	openssh
+Setup pacman and yay/paru (This might be a good time to dump in all your config files and bash files. If you make any changes to the config files on the current system then remember to backup the same to your repository)
+	yay/paru requires base-devel and git
+Setting up the graphical environment
+Display server - xorg or wayland
+Window manager
+Qtile
+	qtile 
+	xorg-xwayland optional for qtile
+	python-pywlroots optional for qtile
+	qt5-wayland
+	polkit-qt5
+	gnu-free-fonts
+Sway
+	sway 
+	xorg-xwayland optional for sway
+	open sway on login - Refer to the sway page on archwiki
+Hyprland
+	hyprland 
+	gnu-free-fonts
+Terminal
+	alacritty
+Shell
+	dash (Use bash only for personal scripts. Sway system (xdg-desktop etc) contains bashisms)
+		Modify the first line in your personal scripts to point to bin/dash instead of bin/sh
+	zsh (zsh-theme-powerlevel10k-git, zsh-autosuggestions-git, zsh-syntax-highlighting-git, zsh-you-should-use)
+	lf
+nvim
+	nvim-lazy
+Browser
+	google-chrome aur
+Downloader
+	wget
+Decompressing zip files
+	unzip
+Rice terminal
+    https://github.com/alacritty/alacritty-theme
+Fonts
+    https://www.nerdfonts.com/font-downloads
+    noto-fonts-emoji (for displaying python unicode emojis - required by safe eyes broken heart and green heart etc)
+    Installed fonts CascadiaCode (CaskaydiaCove), FiraCode, JetBrainsMono, ComicMono
+Change Bash to Dash
+Rice Sway (Basic layout and colors)
+Audio, Brightness (light), Bluetooth (Set defaults on boot)
+	Brightness - light (Add user to the video group for non-root access)
+	Audio - wireplumber
+		pipewire-audio optional for pipewire
+		pavucontrol for Graphical settings
+	Buetooth - blueman (enable bluetooth.service and in the plugins of blueman under power management disable autostart adapter)
+	Wifi - network-manager-applet (automatically installs nm-connection-editor)
+Multi monitor
+Rice neovim
+Display drivers
