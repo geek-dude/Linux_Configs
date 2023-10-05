@@ -1,0 +1,2 @@
+# ignoring the nvim lazy plugin database file
+lazy-lock.json
