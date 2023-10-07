@@ -46,7 +46,7 @@ export EDITOR="nvim"
 export TERMINAL="alacritty"
 export BROWSER="google-chrome-stable"
 export PAGER="less"
-export "WM=sway"
+export "WM=qtile"
 
 #Prompt
 #PS1='\[\e[01;32m\]\n\w\[\e[01;31m\]\n\T\[\e[00;33m\] \u\[\e[01;36m\] -> \[\e[00;37m\]'
