@@ -58,7 +58,7 @@ Terminal
 Shell
 	dash (Use bash only for personal scripts. Sway system (xdg-desktop etc) contains bashisms)
 		Modify the first line in your personal scripts to point to bin/dash instead of bin/sh
-	zsh (zsh-theme-powerlevel10k-git, zsh-autosuggestions-git, zsh-syntax-highlighting-git, zsh-you-should-use)
+	zsh (zsh-theme-powerlevel10k-git (Meslo Nerd Font - availabel in the same repo), zsh-autosuggestions-git, zsh-syntax-highlighting-git, zsh-you-should-use)
 	lf
 nvim
 	nvim-lazy
