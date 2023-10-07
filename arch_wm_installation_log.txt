@@ -83,6 +83,7 @@ Audio, Brightness (light), Bluetooth (Set defaults on boot)
 		pavucontrol for Graphical settings
 	Buetooth - blueman (enable bluetooth.service and in the plugins of blueman under power management disable autostart adapter)
 	Wifi - network-manager-applet (automatically installs nm-connection-editor)
+System level theme - GTK and QT
 Multi monitor
 Rice neovim
 Display drivers
