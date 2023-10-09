@@ -1,0 +1,45 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+#PS1='[\u@\h \W]\$ '
+PS1='\[\e[01;32m\]\n\w\[\e[01;31m\]\n\T\[\e[01;33m\] \u\[\e[01;31m\] <---> \[\e[00;31m\]'
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# Add user's commands
+if [ -d "$HOME/.bin/" ]; then
+    for file in "$HOME/.bin/"*; do
+        . "$file"
+    done
+fi
+
+# Get color support for 'less'
+export LESS="--RAW-CONTROL-CHARS"
+# Fixes a bug related to groff which is preventing man from displaying color
+# https://bbs.archlinux.org/viewtopic.php?id=287185
+# https://gitlab.archlinux.org/archlinux/packaging/packages/groff/-/commit/958e73c5086d99c87c0d2319088931e1771a42d8
+export GROFF_NO_SGR=1
+
+# Use colors for less, man, etc.
+[[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP
