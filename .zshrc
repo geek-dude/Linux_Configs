@@ -62,3 +62,6 @@ source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Syntax highlighting
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Alias suggestions
+source ~/zsh-you-should-use/zsh-you-should-use.plugin.zsh
