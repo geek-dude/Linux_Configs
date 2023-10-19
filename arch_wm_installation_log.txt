@@ -82,6 +82,8 @@ Rice terminal
 Fonts
     https://www.nerdfonts.com/font-downloads
     noto-fonts-emoji (for displaying python unicode emojis - required by safe eyes broken heart and green heart etc)
+    noto-fonts-cjk (for chinese japanese and korean)
+    noto-fonts (Google indian fonts)
     Installed fonts CascadiaCode (CaskaydiaCove), FiraCode, JetBrainsMono, ComicMono
 Change Bash to Dash
 Rice Sway (Basic layout and colors)
