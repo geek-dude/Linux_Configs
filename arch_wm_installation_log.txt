@@ -60,6 +60,15 @@ Shell
 		Modify the first line in your personal scripts to point to bin/dash instead of bin/sh
 	zsh (zsh-theme-powerlevel10k-git (Meslo Nerd Font - availabel in the same repo), zsh-autosuggestions-git, zsh-syntax-highlighting-git, zsh-you-should-use)
 	lf
+        Image preview (xorg - qtile) - follow the instructions in the below website and install the dependencies below
+        https://github.com/thimc/lfimg
+            ueberzug (Xorg) ueberzugpp (wayland) checkout alternative method sixel if supports alacritty in future.
+                https://www.arewesixelyet.com/#alacritty
+            ffmpegthumbnailer
+            imagemagick
+            poppler
+            epub-thumbnailer-git
+            wkhtmltopdf (Prefer not to install. Takes about an hour to compile and install from AUR)
 nvim
 	nvim-lazy
 Browser
