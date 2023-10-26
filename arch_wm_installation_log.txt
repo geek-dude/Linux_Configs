@@ -62,13 +62,19 @@ Shell
 lf - File manager
     Image preview (xorg - qtile) - follow the instructions in the below website and install the dependencies below
     https://github.com/thimc/lfimg
-        ueberzug (Xorg) ueberzugpp (wayland) checkout alternative method sixel if supports alacritty in future.
+        ueberzug (Xorg) - checkout the alternative method sixel if it supports alacritty in future.
             https://www.arewesixelyet.com/#alacritty
-        ffmpegthumbnailer
-        imagemagick
-        poppler
-        epub-thumbnailer-git
+        ffmpegthumbnailer (For video thumbnails)
+        imagemagick (preview for image formats such as .svg)
+        poppler (For pdf preview)
+        epub-thumbnailer-git (epub document preview)
         wkhtmltopdf (Prefer not to install. Takes about an hour to compile and install from AUR)
+    Image preview (wayland - sway)
+        ueberzugpp (wayland) - checkout the alternative method sixel if it supports alacritty in future.
+            https://www.arewesixelyet.com/#alacritty
+        imagemagick (This should have been automatically installed as a dependency of ueberzugpp. Leave it as automatically installed)
+        ffmpegthumbnailer (For video thumbnails)
+        poppler (For pdf preview)
 nvim
     nvim-lazy
 Browser
