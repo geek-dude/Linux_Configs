@@ -114,3 +114,7 @@ set icons true
 map <a-j> :push :cd<space>
 map <a-n> :push %touch<space>
 map <a-e> :push $nvim<space>
+
+# image preview setup using ueberzugpp
+set previewer ~/.config/lf/preview
+set cleaner ~/.config/lf/cleaner
