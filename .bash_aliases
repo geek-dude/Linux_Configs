@@ -11,3 +11,5 @@ alias la='ls -A'
 alias llvm_setup_environment='. llvm_setup_environment.sh'
 alias vim='nvim'
 alias lf='/home/keerthi/lfimg/lfrun'
+alias totp_git="oathtool -b --totp '33D7EKTGOLLDKUXE'"
+alias totp_iit="oathtool -b --totp 'INQH KT2L YGGK PKBR GCE6 56GB HQZD CFJV'"
