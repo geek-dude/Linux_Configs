@@ -28,4 +28,7 @@ vim.opt.foldmethod = "indent" -- Set fold method to indent
 -- This avoids any potential conflict with nvim-tree
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+-- The below line is always commented because eanbling true colors
+-- makes neovim looks messy. The colors won't match with the terminal theme.
+-- Especially the lua line looks so crappy
 -- vim.opt.termguicolors = true -- set termguicolors to enable highlight groups for nvim-tree
