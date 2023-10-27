@@ -19,8 +19,8 @@ return
         cmd = "NvimTreeToggle",
         dependencies = 'nvim-tree/nvim-web-devicons',
         config = function()
-            -- empty setup using defaults
-            require ("nvim-tree").setup()
+            local options = require("nvim-tree_options")
+            require ("nvim-tree").setup(options)
         end,
     },
 
