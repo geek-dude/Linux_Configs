@@ -69,10 +69,8 @@ return
     -- Comment plugin
     {
         'numToStr/Comment.nvim',
-        opts =
-        {
-            -- add any options here
-        },
+        event = "VeryLazy",
+        config = true,
     },
 
     -- Mason - LSP server manager
