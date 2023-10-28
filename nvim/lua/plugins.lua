@@ -32,8 +32,7 @@ return
     -- Color scheme Tranquility
     {
         "jqno/tranquility.nvim",
-        lazy = false, -- make sure we load this during startup if it is your main colorscheme
-        priority = 1000, -- make sure to load this before all the other start plugins
+        event = "VeryLazy",
         config = function()
             -- load the colorscheme here
             vim.cmd([[colorscheme green-tranquility]])
@@ -43,13 +42,9 @@ return
     -- Statusline plugin
     {
         'nvim-lualine/lualine.nvim',
+        event = "VeryLazy",
         dependencies = { 'nvim-tree/nvim-web-devicons' },
-        init = function()
-            require ("lualine").setup
-            {
-                options = { theme = "16color" },
-            }
-        end,
+        opts = { options = { theme = "16color" }, },
     },
 
     -- Multi cursor plugin
