@@ -70,6 +70,13 @@ return
         config = true,
     },
 
+    -- git diffs
+    {
+        'sindrets/diffview.nvim',
+        cmd = "DiffviewOpen",
+        config = true,
+    },
+
     -- Mason - LSP server manager
     {
         "williamboman/mason.nvim",
