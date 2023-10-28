@@ -18,10 +18,13 @@ return
         "nvim-tree/nvim-tree.lua",
         cmd = "NvimTreeToggle",
         dependencies = 'nvim-tree/nvim-web-devicons',
-        config = function()
-            local options = require("nvim-tree_options")
-            require ("nvim-tree").setup(options)
+        init = function()
+            -- disable netrw at the very start of your init.lua
+            -- This avoids any potential conflict with nvim-tree
+            vim.g.loaded_netrw = 1
+            vim.g.loaded_netrwPlugin = 1
         end,
+        opts = require("nvim-tree_options")
     },
 
     -- Refer this website for good color schemes
