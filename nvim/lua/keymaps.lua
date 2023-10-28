@@ -20,6 +20,3 @@ vim.keymap.set("n", "<A-T>", "<C-w>T")
 -- Commandline mode movement
 vim.keymap.set('c', '<C-F>', '<Right>', { desc = 'move [F]orward' })
 vim.keymap.set('c', '<C-B>', '<Left>', { desc = 'move [B]ackward' })
-
--- Plugin specific keybindings
-vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = 'Open file editor' })

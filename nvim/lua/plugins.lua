@@ -10,7 +10,13 @@ return
             vim.o.timeout = true
             vim.o.timeoutlen = 300
         end,
-        opts = require ("which-key_options"),
+        config = function()
+            local configuration = require ("which-key_configuration")
+            local mapper = require ("which-key_mappings")
+            local wk = require ("which-key")
+            wk.setup(configuration)
+            wk.register (mapper)
+        end,
     },
 
     -- File explorer - nvim-tree
@@ -24,7 +30,7 @@ return
             vim.g.loaded_netrw = 1
             vim.g.loaded_netrwPlugin = 1
         end,
-        opts = require("nvim-tree_options")
+        opts = require("nvim-tree_opts")
     },
 
     -- Refer this website for good color schemes
@@ -53,17 +59,8 @@ return
         dependencies = {
             'smoka7/hydra.nvim',
         },
-        opts = {},
         cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor' },
-        keys =
-        {
-                {
-                    mode = { 'v', 'n' },
-                    '<Leader>m',
-                    '<cmd>MCstart<cr>',
-                    desc = 'Create a selection for selected text or word under the cursor',
-                },
-        },
+        config = true,
     },
 
     -- Comment plugin

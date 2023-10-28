@@ -1,4 +1,4 @@
--- which-key plugin options
+-- which-key plugin display options
 return
 {
     icons =
