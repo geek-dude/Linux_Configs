@@ -38,7 +38,7 @@ return
     -- Color scheme Tranquility
     {
         "jqno/tranquility.nvim",
-        event = "VeryLazy",
+        lazy = true,
         config = function()
             -- load the colorscheme here
             vim.cmd([[colorscheme green-tranquility]])
@@ -49,7 +49,7 @@ return
     {
         'nvim-lualine/lualine.nvim',
         event = "VeryLazy",
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        dependencies = { 'nvim-tree/nvim-web-devicons', 'jqno/tranquility.nvim' },
         opts = { options = { theme = "16color" }, },
     },
 
