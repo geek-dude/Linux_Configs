@@ -53,6 +53,19 @@ return
         opts = { options = { theme = "16color" }, },
     },
 
+    -- Top buffer line
+    {
+        "akinsho/bufferline.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        version = "*",
+        opts = {
+            options = {
+                mode = "tabs",
+                -- separator_style = "slant",
+            },
+        },
+    },
+
     -- Multi cursor plugin
     {
         "smoka7/multicursors.nvim",
