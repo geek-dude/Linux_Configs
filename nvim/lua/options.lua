@@ -19,7 +19,19 @@ vim.opt.tabstop = 8 -- Hard tabbing width. Takes effect only when soft tabbing i
 vim.opt.wildmode = "longest:full,full"
 vim.opt.wildmenu = true -- Full won't work if this is disabled
 
-vim.opt.ignorecase = true -- Case insensitive search
+vim.opt.cursorline = true -- Highlights the current line under the cursor
+vim.opt.scrolloff = 8 -- Minimum number of lines to be displayed above and below the cursor
+vim.opt.signcolumn = 'yes' -- Always show sign column even not in debugging mode
 
+-- Search options with / and ?
+vim.opt.hlsearch = false -- Do not highlight the item being searched
+vim.opt.incsearch = true -- Incrementally highlight the item being searched
+vim.opt.ignorecase = true -- Case insensitive search
+vim.opt.smartcase = true -- Over-ride ignorecase when the search item contains capital letters
+vim.opt.wrap = true -- Wrap back to the first search after the last one
+
+-- Fold options
 vim.opt.foldenable = false -- Unfold everything by default
 vim.opt.foldmethod = "indent" -- Set fold method to indent
+
+vim.opt.termguicolors = true -- Uses true color (More than the 16 colors of the terminal)
