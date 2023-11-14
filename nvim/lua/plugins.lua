@@ -5,6 +5,7 @@ return
     -- Command key suggestions
     {
         "folke/which-key.nvim",
+        dependencies = 'loctvl842/monokai-pro.nvim',
         event = "VeryLazy",
         init = function()
             vim.o.timeout = true
@@ -23,7 +24,7 @@ return
     {
         "nvim-tree/nvim-tree.lua",
         cmd = "NvimTreeToggle",
-        dependencies = 'nvim-tree/nvim-web-devicons',
+        dependencies = { 'nvim-tree/nvim-web-devicons', 'loctvl842/monokai-pro.nvim' },
         init = function()
             -- disable netrw at the very start of your init.lua
             -- This avoids any potential conflict with nvim-tree
@@ -45,23 +46,74 @@ return
         end,
     },
 
+    -- Color scheme Catppuccin
+    {
+        "catppuccin/nvim",
+        lazy = true,
+        config = function()
+            require("catppuccin").setup {
+                transparent_background = true,
+            }
+            -- load the colorscheme here
+            vim.cmd([[colorscheme catppuccin]])
+        end,
+    },
+
+    -- Color scheme Monokai-Pro
+    {
+        "loctvl842/monokai-pro.nvim",
+        lazy = true,
+        config = function()
+            require("monokai-pro").setup {
+                transparent_background = true,
+                filter = "classic", -- classic | octagon | pro | machine | ristretto | spectrum
+                background_clear = {
+                    -- "float_win",
+                    -- "toggleterm",
+                    -- "telescope",
+                    "which-key",
+                    -- "renamer",
+                    -- "notify",
+                    "nvim-tree",
+                    -- "neo-tree",
+                    -- "bufferline", -- better used if background of `neo-tree` or `nvim-tree` is cleared
+                },-- "float_win", "toggleterm", "telescope", "which-key", "renamer", "neo-tree", "nvim-tree", "bufferline"
+            }
+            -- load the colorscheme here
+            vim.cmd([[colorscheme monokai-pro]])
+        end,
+    },
+
+    -- Color scheme Gruvbox
+    {
+        "ellisonleao/gruvbox.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("gruvbox").setup {
+                transparent_mode = true,
+            }
+            -- load the colorscheme here
+            -- vim.cmd([[colorscheme gruvbox]])
+        end,
+    },
+
     -- Statusline plugin
     {
         'nvim-lualine/lualine.nvim',
         event = "VeryLazy",
-        dependencies = { 'nvim-tree/nvim-web-devicons', 'jqno/tranquility.nvim' },
-        opts = { options = { theme = "16color" }, },
+        dependencies = { 'nvim-tree/nvim-web-devicons', 'loctvl842/monokai-pro.nvim' },
+        opts = { options = { theme = "auto" }, },
     },
 
     -- Top buffer line
     {
         "akinsho/bufferline.nvim",
-        dependencies = { "nvim-tree/nvim-web-devicons" },
+        dependencies = { "nvim-tree/nvim-web-devicons", "loctvl842/monokai-pro.nvim" },
         version = "*",
         opts = {
             options = {
                 mode = "tabs",
-                -- separator_style = "slant",
+                separator_style = "slant",
             },
         },
     },
