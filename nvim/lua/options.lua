@@ -34,4 +34,8 @@ vim.opt.wrap = true -- Wrap back to the first search after the last one
 vim.opt.foldenable = false -- Unfold everything by default
 vim.opt.foldmethod = "indent" -- Set fold method to indent
 
-vim.opt.termguicolors = true -- Uses true color (More than the 16 colors of the terminal)
+-- split windows
+vim.opt.splitright = true -- split vertical window to the right
+vim.opt.splitbelow = true -- split horizontal window to the bottom
+
+vim.opt.termguicolors = true -- Uses true color (More than the 16 colors of the terminal. Required by most themes)
