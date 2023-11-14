@@ -197,7 +197,7 @@ font:
 #draw_bold_text_with_bright_colors: false
 
 import:
- - ~/.config/alacritty/themes/themes/tomorrow_night_bright.yaml
+  - ~/.config/alacritty/themes/themes/monokai_charcoal.yaml
 # Colors (Tomorrow Night)
 #colors:
   # Default colors
