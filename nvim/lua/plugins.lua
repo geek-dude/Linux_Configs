@@ -34,6 +34,20 @@ return
         opts = require("nvim-tree_opts")
     },
 
+    -- Terminal toggle plugin
+    {
+        'akinsho/toggleterm.nvim', version = "*",
+        opts = {
+            open_mapping = [[<c-\>]],
+            size = 10,
+            direction = 'float',
+            float_opts = {
+                border = 'curved',  --'single' | 'double' | 'shadow' | 'curved' | ... other options supported by win open
+            },
+
+        },
+    },
+
     -- Refer this website for good color schemes
     -- https://vimcolorschemes.com/
     -- Color scheme Tranquility
@@ -53,6 +67,7 @@ return
         config = function()
             require("catppuccin").setup {
                 transparent_background = true,
+                term_colors = false,
             }
             -- load the colorscheme here
             vim.cmd([[colorscheme catppuccin]])
@@ -66,6 +81,7 @@ return
         config = function()
             require("monokai-pro").setup {
                 transparent_background = true,
+                terminal_colors = false,
                 filter = "classic", -- classic | octagon | pro | machine | ristretto | spectrum
                 background_clear = {
                     -- "float_win",
@@ -88,13 +104,10 @@ return
     {
         "ellisonleao/gruvbox.nvim",
         event = "VeryLazy",
-        config = function()
-            require("gruvbox").setup {
-                transparent_mode = true,
-            }
-            -- load the colorscheme here
-            -- vim.cmd([[colorscheme gruvbox]])
-        end,
+        opts = {
+            terminal_colors = false,
+            transparent_mode = true,
+        },
     },
 
     -- Statusline plugin
