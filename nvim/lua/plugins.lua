@@ -37,6 +37,7 @@ return
     -- Terminal toggle plugin
     {
         'akinsho/toggleterm.nvim', version = "*",
+        keys = { mode = { 'n' }, '<C-\\>' },
         opts = {
             open_mapping = [[<c-\>]],
             size = 10,
@@ -121,6 +122,7 @@ return
     -- Top buffer line
     {
         "akinsho/bufferline.nvim",
+        event = "VeryLazy",
         dependencies = { "nvim-tree/nvim-web-devicons", "loctvl842/monokai-pro.nvim" },
         version = "*",
         opts = {
@@ -153,32 +155,5 @@ return
         'sindrets/diffview.nvim',
         cmd = "DiffviewOpen",
         config = true,
-    },
-
-    -- Mason - LSP server manager
-    {
-        "williamboman/mason.nvim",
-        dependencies = { '/neovim/nvim-lspconfig', 'williamboman/mason-lspconfig.nvim', 
-                        'mfussenegger/nvim-dap', 'rcarriga/nvim-dap-ui', 
-                        'mfussenegger/nvim-lint', 'mhartington/formatter.nvim' },
-        init = function()
-            require("mason").setup({
-            ui = 
-                {
-                icons =
-                    {
-                        package_installed = "✓",
-                        package_pending = "➜",
-                        package_uninstalled = "✗"
-                    }
-                }
-            })
-        end,
-    },
-
-    -- plugins/telescope.lua:
-    {
-        'nvim-telescope/telescope.nvim', branch = '0.1.x',
-        dependencies = { 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-web-devicons', 'BurntSushi/ripgrep', 'sharkdp/fd', 'nvim-treesitter/nvim-treesitter' },
     },
 }
