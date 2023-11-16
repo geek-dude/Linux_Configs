@@ -41,11 +41,7 @@ return
         opts = {
             open_mapping = [[<c-\>]],
             size = 10,
-            direction = 'float',
-            float_opts = {
-                border = 'curved',  --'single' | 'double' | 'shadow' | 'curved' | ... other options supported by win open
-            },
-
+            direction = 'tab',
         },
     },
 
@@ -168,6 +164,11 @@ return
             'nvim-treesitter/nvim-treesitter', build = ':TSUpdate',
         },
         config = require ("telescope_configuration").tel_config,
+    },
+
+    {
+        "stevearc/dressing.nvim",
+        event = "VeryLazy",
     },
 
 }
