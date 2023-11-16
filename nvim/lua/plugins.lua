@@ -25,13 +25,13 @@ return
         "nvim-tree/nvim-tree.lua",
         cmd = "NvimTreeToggle",
         dependencies = { 'nvim-tree/nvim-web-devicons', 'loctvl842/monokai-pro.nvim' },
-        init = function()
+        config = function()
             -- disable netrw at the very start of your init.lua
             -- This avoids any potential conflict with nvim-tree
             vim.g.loaded_netrw = 1
             vim.g.loaded_netrwPlugin = 1
+            require ( "nvim-tree" ).setup ( require ("nvim-tree_opts") )
         end,
-        opts = require ("nvim-tree_opts")
     },
 
     -- Terminal toggle plugin
@@ -169,6 +169,20 @@ return
     {
         "stevearc/dressing.nvim",
         event = "VeryLazy",
+    },
+
+    {
+        "hrsh7th/nvim-cmp",
+        event = "InsertEnter",
+        dependencies = {
+            "hrsh7th/cmp-buffer", -- source for text in buffer
+            "hrsh7th/cmp-path", -- source for file system paths
+            "L3MON4D3/LuaSnip", -- snippet engine
+            "saadparwaiz1/cmp_luasnip", -- for autocompletion
+            "rafamadriz/friendly-snippets", -- useful snippets
+            "onsails/lspkind.nvim", -- vs-code like pictograms
+        },
+        config = require ("completion_config").comp_config,
     },
 
 }
