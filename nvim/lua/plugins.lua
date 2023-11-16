@@ -15,7 +15,7 @@ return
             local configuration = require ("which-key_configuration")
             local mapper = require ("which-key_mappings")
             local wk = require ("which-key")
-            wk.setup(configuration)
+            wk.setup (configuration)
             wk.register (mapper)
         end,
     },
@@ -31,7 +31,7 @@ return
             vim.g.loaded_netrw = 1
             vim.g.loaded_netrwPlugin = 1
         end,
-        opts = require("nvim-tree_opts")
+        opts = require ("nvim-tree_opts")
     },
 
     -- Terminal toggle plugin
@@ -91,7 +91,7 @@ return
                     "which-key",
                     -- "renamer",
                     -- "notify",
-                    "nvim-tree",
+                    -- "nvim-tree",
                     -- "neo-tree",
                     -- "bufferline", -- better used if background of `neo-tree` or `nvim-tree` is cleared
                 },-- "float_win", "toggleterm", "telescope", "which-key", "renamer", "neo-tree", "nvim-tree", "bufferline"
@@ -156,4 +156,18 @@ return
         cmd = "DiffviewOpen",
         config = true,
     },
+
+    -- Telescope - the fuzzy finder
+    {
+        'nvim-telescope/telescope.nvim', branch = '0.1.x',
+        cmd = "Telescope",
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+            'nvim-tree/nvim-web-devicons',
+            'nvim-treesitter/nvim-treesitter', build = ':TSUpdate',
+        },
+        config = require ("telescope_configuration").tel_config,
+    },
+
 }
