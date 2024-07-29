@@ -1,0 +1,3 @@
+evdev:input:b0003v3554pFC03e0110*
+ KEYBOARD_KEY_90002=btn_left
+ KEYBOARD_KEY_90001=btn_right
