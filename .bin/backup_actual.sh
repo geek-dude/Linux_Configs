@@ -1,5 +1,2 @@
 #!/bin/dash
-function backup_actual()
-{
-    rsync -vhiLruyPtz --delete-delay --stats $1 localhost:$2
-}
+rsync -vhiLruyPtz --delete-delay --stats $1 localhost:$2

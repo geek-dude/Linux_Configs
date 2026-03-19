@@ -37,7 +37,7 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    alacritty|xterm-color|*-256color) color_prompt=yes;;
+    xterm-color|*-256color|alacritty|alacritty-direct) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -57,8 +57,8 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-    PS1='${debian_chroot:+($debian_chroot)}\[\e[01;32m\]\n\w\[\e[01;31m\]\n\T\[\e[00;33m\] \u@\h\[\e[01;36m\] -> \[\e[00;49m\]'
+    # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\e[01;32m\]\n\w\[\e[01;36m\]\n\T\[\e[01;93m\] \u@\h\[\e[01;36m\] -> \[\e[00;39m\]'
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -113,13 +113,6 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
-fi
-
-# Add user's commands
-if [ -d "$HOME/.bin/" ]; then
-    for file in "$HOME/.bin/"*; do
-        . "$file"
-    done
 fi
 
 # enable programmable completion features (you don't need to enable
