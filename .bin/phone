@@ -1,0 +1,34 @@
+#!/bin/dash
+
+# Replace this with your phone's MAC address
+PHONE_MAC="b2:63:bb:9b:6e:97"
+
+IP=$(ip neigh | grep -i "$PHONE_MAC" | awk '{print $1}')
+
+if [ -z "$IP" ]; then
+  echo "Phone not found on network"
+  exit 1
+fi
+
+echo "Found phone at $IP"
+
+adb connect $IP:5555
+
+# Check connection
+if ! adb devices | grep -q "$IP:5555"; then
+  echo "ADB connection failed. Did you run adb tcpip 5555?"
+  exit 1
+fi
+
+# Save current timeout
+ORIGINAL_TIMEOUT=$(adb shell settings get system screen_off_timeout)
+
+# Set "infinite" timeout
+adb shell settings put system screen_off_timeout 214748364
+
+scrcpy --stay-awake --max-size 800
+
+# Restore original timeout after exit
+adb shell settings put system screen_off_timeout "$ORIGINAL_TIMEOUT"
+
+adb disconnect
