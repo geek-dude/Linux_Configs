@@ -36,14 +36,17 @@ fi
 
 # Add user's commands
 if [ -d "$HOME/.bin/" ]; then
-    for file in "$HOME/.bin/"*; do
-        . "$file"
-    done
+    PATH="$HOME/.bin:$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
 fi
 
 #Some environment variables
-export EDITOR="nvim"
+export EDITOR="vi"
+export TERMINAL="alacritty"
+export BROWSER="google-chrome-stable"
 export PAGER="less"
-
-#Prompt
-#PS1='\[\e[01;32m\]\n\w\[\e[01;31m\]\n\T\[\e[00;33m\] \u\[\e[01;36m\] -> \[\e[00;37m\]'
+#export WM="qtile"
