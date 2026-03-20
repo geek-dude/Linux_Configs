@@ -14,7 +14,6 @@ HISTSIZE=1000
 SAVEHIST=1000
 setopt autocd beep extendedglob nomatch notify
 bindkey -v
-bindkey '^R' history-incremental-search-backward
 # End of lines configured by zsh-newuser-install
 
 
@@ -55,6 +54,8 @@ bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
+
+bindkey '^R' history-incremental-search-backward
 
 # Powerlevel10k theme prompt
 source ~/Documents/powerlevel10k/powerlevel10k.zsh-theme
