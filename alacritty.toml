@@ -1,0 +1,34 @@
+[general]
+
+import = [ "~/Documents/alacritty-theme/themes/monokai_charcoal.toml", ]
+
+live_config_reload = true
+
+[window]
+
+opacity = 1
+
+padding.x = 10
+padding.y = 10
+dynamic_padding = true
+
+decorations = "Full"
+decorations_theme_variant = "Dark" # "Light"
+
+dynamic_title = true
+
+[scrolling]
+
+history = 100000
+
+[font]
+
+normal = { family = "CaskaydiaCoveNerdFontMono", style = "Regular" }
+bold = { family = "CaskaydiaCoveNerdFontMono", style = "Bold" }
+italic = { family = "CaskaydiaCoveNerdFontMono", style = "Italic" }
+bold_italic = { family = "CaskaydiaCoveNerdFontMono", style = "BoldItalic" }
+
+size = 13
+
+[selection]
+save_to_clipboard = true
