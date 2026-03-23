@@ -1,0 +1,141 @@
+19/03/2025 google-chrome deb file from website. Also adds ppa.
+20/03/2025 timeshift ppa:teejee2008/timeshift
+20/03/2025 neofetch apt install
+20/03/2025 code deb file from website. Also adds ppa.
+21/03/2025 libreoffice apt install
+24/03/2025 vlc snap install
+25/03/2025 gnome-shell-extension-manager apt install
+26/03/2025 gparted apt install
+28/03/2025 git apt install
+02/04/2025 Alacritty
+	Followed the installation instructions at the following link:
+	https://github.com/alacritty/alacritty/blob/master/INSTALL.md
+	All the install instructions and cargo are unistalled after successful installation of alacritty
+03/04/2025 CaskaydiaCoveNerdFont from https://www.nerdfonts.com/font-downloads
+03/04/2025 FiraCode from https://www.nerdfonts.com/font-downloads
+03/04/2025 JetBrainsMono from https://www.nerdfonts.com/font-downloads
+
+	Theme - monokai_charcoal.toml for alacritty and monokai-charcoal (grey) for VS Code
+
+12/03/2025 zsh apt install
+14/03/2025 zsh-autosuggestions apt install
+14/03/2025 zsh-syntax-highlighting apt install
+14/03/2025 powerlevel10k git@github.com:romkatv/powerlevel10k.git
+14/03/2025 zsh-you-should-use git@github.com:MichaelAquilina/zsh-you-should-use.git
+14/03/2025 lf apt install
+14/03/2025 curl apt install
+15/03/2025 libxcb-cursor0 apt install - for calibre
+
+15/03/2025 installed calibre through the following command
+	sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
+	For update run the same command again
+	Uninstaller is at /usr/bin/calibre-uninstall
+
+15/03/2025 k2pdfopt - directly downloaded binary through apt. Adding it to /usr/local/bin
+16/05/2025 python3-venv apt install
+16/05/2025 EB Garamond from https://fonts.google.com/specimen/EB+Garamond
+13/06/2025 openssh-server apt install
+Flatpak install
+	
+17/06/2025 gnome-network-displays flatpak install
+21/06/2025 oathtool apt install
+25/06/2025 exfatprogs apt install
+08/07/2025 DVD player
+	Followed the steps from https://itsfoss.com/play-dvd-ubuntu-1310/
+	1. sudo apt install libdvd-pkg
+	Before running the second step below, connect to mobile hotspot. Institute wifi doesn't allow connection to video lan website. You will get some ssl handshake error
+	2. sudo dpkg-reconfigure libdvd-pkg
+
+30/07/2025 GEM5 installation
+	The following dependencies are already pre-installed with Ubuntu 24 and after running the below command they will convert to manual install. When you uninstall GEM5 in the future, convert them back to auto install.
+	Pre-installed dependencies:
+	wget libpng-dev m4 zlib1g zlib1g-dev build-essential
+	Installation command
+	sudo apt install build-essential scons python3-dev git pre-commit zlib1g zlib1g-dev \
+    libprotobuf-dev protobuf-compiler libprotoc-dev libgoogle-perftools-dev \
+    libboost-all-dev  libhdf5-serial-dev python3-pydot python3-venv python3-tk mypy \
+    m4 libcapstone-dev libpng-dev libelf-dev pkg-config wget cmake doxygen
+
+05/09/2025 texlive-full apt install
+15/09/2025 rpi-imager deb file from website. Doesn't add any ppa, repository or key.
+
+Graphics drivers
+Kernel Level
+	The kernel drivers for both intel and amd gpus are installed by default but amd gpu is using the older radeon driver insteaad of amd gpu. It is changed by setting the kernel parameter in grub and also by creating a modprobe config amdgpu.conf in /etc/modprobe.d
+	# /etc/modprobe.d/amdgpu.conf
+	options amdgpu si_support=1
+	options radeon si_support=0
+	blacklist radeon
+	For the grub config change this line:
+	GRUB_CMDLINE_LINUX_DEFAULT="quiet splash radeon.si_support=0 amdgpu.si_support=1 resume=UUID=ff87c016-14ea-413a-8935-2e9330962c9d"
+Opengl
+	All the opengltools (mesa-utils which provides glxinfo) and drivers for both intel and amd gpu (mesa intel and radeonsi) are installed by default in ubuntu
+Vulkan
+	18/09/2025 vulkan-tools apt install (For seeing the vulkan driver info using vulkaninfo)
+	mesa-vulkan-drivers this is a meta package which pulls the vulkan drivers for all your hardware. It is installed by default in ubuntu. (anv (intel) and radv (amd))
+Opencl
+	18/09/2025 clinfo apt install (For seeing the opencl driver info)
+	18/09/2025 mesa-opencl-icd apt install (opencl driver for amd gpu)
+	18/09/2025 intel-opencl-icd apt install (opencl driver for amd gpu)
+	Amd gpu open cl has two optins. Clover which is old and buggy and currently not working on ubuntu 24 due to some library header file conflict. But rusticl which is the latest is working and its support will only increase further in the future. Ran the following command to remove clover
+	sudo mv /etc/OpenCL/vendors/mesa.icd /etc/OpenCL/vendors/mesa.icd.disabled
+	However rusticl doesn't select the correct driver unless it is explicitly told to do so with an export variable as follows
+		export RUSTICL_ENABLE=radeonsi So any opencl app that you want to run on amd using rusticl must be launched from the terminal after doing the aforementioned export.
+	On the intel opencl side, there are no issues and it works with neo properly.
+Video acceleration/decoding
+	For amd mesa-va-drivers (vaapi support for amd) and mesa-vdpau-drivers (provides vdpau support for both amd and intel) are already installed.
+	For intel intel-media-va-driver (vaapi support for intel) is already installed.
+	18/09/2025 vainfo apt install (This ia video acceleration api and also helps us to see the list of drivers and codes supported with vainfo command)
+	As usual as with rest of the stack it picks up intel gpu by default. To switch to amd gpu use the below format
+	DRI_PRIME=1 LIBVA_DRIVER_NAME=radeonsi vainfo
+GPU usage in chrome and vlc
+	Flags to change in chrome:
+	1) Override software rendering list
+	2) Vulkan - currently doesn't work with intel in wayland. Works just fine with amd. Turn off when using intel gpu but turn on when using amd gpu
+	3) Hardware-accelerated video decode - enabled by default
+	Use igpu most of the times, except when playing web games or while watching a video streaming service if video is extremely high resolution (>4k) and Intel CPU is bottlenecked.
+	Vlc settings
+	1) tools -> preferences -> input/codecs -> Hardware-accelerated decoding = VA-API video decoder (Choose VA-API video decoder via DRM if running with amd gpu)
+	2) tools -? preferences -> video -> output -> OpenGL video output
+Monitoring tools
+	18/09/2025 radeontop apt install (for monitoring amd gpu usage)
+	18/09/2025 intel-gpu-tools apt install (provides intel_gpu_top for monitoring intel gpu usage. Only works with sudo)
+
+19/09/2025 apt-cache apt install
+19/09/2025 aptitude apt install (Always install new packages with aptitude from now on)
+
+07/10/2025 safeeyes
+	Installed safeeyes directly from source inside a python virtual environment as it seems to constantly break or some plugin like idle usage detection doesn't work when installed through apt. The virtual environment is needed as it relies on pre-installing some python packages through pip and the safeeyes itself should be installed through pip. Installing python packages by installing pip at a system level through apt and then installing something through that system-level pip results in the warning breaking packages and will not run unless forced to do so by passing an extra flag called --break-packages or something.
+
+The dependencies needed according to https://slgobinath.github.io/SafeEyes/ are:
+	apt dependencies
+		gir1.2-notify-0.7
+		gir1.2-gtk-4.0
+	Both of the above were already installed as autodependencies for some other package
+	Now, Python packages
+		python3-babel
+		python3-croniter
+		python3-gi (This package gives trouble. It expects some libraries to be pre-installed through apt. See below.)
+		python3-packaging
+		python3-xlib
+		python3-pywayland (Needed in Wayland for smartpause plugin)
+		xprintidle (optional in X11 for smartpause plugin)
+		ffmpeg or pipewire (either of them works but anyway pipewire is autoinsatlled in Ubuntu by default for some other application)
+		Python 3.10+ (Installed in Ubuntu by default)
+	For installing python3-gi the following packages are installed through apt after referring to this site https://pygobject.gnome.org/getting_started.html#ubuntu-getting-started :
+		libgirepository-2.0-dev
+		gcc (I would have already installed it one way or the other for running any simulator)
+		libcairo2-dev
+		pkg-config (Already installed for Gem5)
+		python3-dev (Already installed for Gem5)
+		gir1.2-gtk-4.0 (Already installed as mentioned above in the apt package list)
+	After installing the above python-gi can be installed with pip install PyGObject inside a virtual environment
+Finally safeeyes itself can be installed inside a virtual environment with pip install safeeyes
+To run safeeyes on launch a script file is created which is added to my linux configs. (Note ~ doesn't get expanded in this script and /home/user must explicitly mentioned in the paths)
+Finally this script can be called on boot by adding it to the Ubuntu's autostart application list using the gui editor provided with Ubuntu
+
+13/11/2025 zram-config apt install
+	For instructions on using see: https://fosspost.org/enable-zram-on-linux-better-system-performance
+10/01/2026 zoom deb file from website.
+24/02/2026 guvcview apt install
+16/03/2026 gufw (front gui to ufw, firewall) apt install
