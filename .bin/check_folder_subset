@@ -1,0 +1,53 @@
+#!/usr/bin/dash
+
+# Exit on error and undefined variables
+set -eu
+
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 <folder1> <folder2>"
+    exit 1
+fi
+
+folder1=$1
+folder2=$2
+
+if [ ! -d "$folder1" ]; then
+    echo "Error: $folder1 is not a directory"
+    exit 1
+fi
+
+if [ ! -d "$folder2" ]; then
+    echo "Error: $folder2 is not a directory"
+    exit 1
+fi
+
+tmpfile=$(mktemp)
+found_missing=0
+
+find "$folder1" -type f | while IFS= read -r file1; do
+    rel_path=${file1#"$folder1"/}
+    file2="$folder2/$rel_path"
+
+    if [ ! -f "$file2" ]; then
+        echo "$rel_path (missing)" >> "$tmpfile"
+        found_missing=1
+        continue
+    fi
+
+    size1=$(stat -c%s "$file1")
+    size2=$(stat -c%s "$file2")
+
+    if [ "$size1" -ne "$size2" ]; then
+        echo "$rel_path (size mismatch)" >> "$tmpfile"
+        found_missing=1
+    fi
+done
+
+if [ -s "$tmpfile" ]; then
+    echo "❌ Files in '$folder1' without a match in '$folder2':"
+    cat "$tmpfile"
+else
+    echo "✅ Folder '$folder1' is a subset of '$folder2'"
+fi
+
+rm -f "$tmpfile"
