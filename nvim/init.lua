@@ -1,3 +1,3 @@
-require ("keymaps")
-require ("options")
-require ("lazy").setup('plugins')
+require("keymaps")
+require("options")
+require("lazy").setup("plugins")

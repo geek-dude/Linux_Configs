@@ -46,7 +46,7 @@ fi
 
 #Some environment variables
 export EDITOR="nvim"
-export TERMINAL="alacritty"
+export TERMINAL="wezterm"
 export BROWSER="google-chrome-stable"
 export PAGER="less"
 #export WM="qtile"

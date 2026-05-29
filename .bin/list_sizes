@@ -14,9 +14,9 @@ printf "${GREEN_BOLD}Regular files and folders:${NC}\n"
 set -- "$DIR"/*
 
 if [ -e "$1" ]; then
-    du -sch "$@" 2>/dev/null | sed 's|\(\S\+\s\+\).*/|\1|'
+  du -sch "$@" 2>/dev/null | sed 's|\(\S\+\s\+\).*/|\1|'
 else
-    printf "${RED}No regular files found${NC}\n"
+  printf "${RED}No regular files found${NC}\n"
 fi
 du -sch "$DIR"/* 2>/dev/null | sed 's|\(\S\+\s\+\).*/|\1|'
 
@@ -25,7 +25,8 @@ printf "\n${GREEN_BOLD}Hidden files and folders:${NC}\n"
 set -- "$DIR"/.[!.]* "$DIR"/..?*
 
 if [ -e "$1" ]; then
-    du -sch "$@" 2>/dev/null | sed 's|\(\S\+\s\+\).*/|\1|'
+  du -sch "$@" 2>/dev/null | sed 's|\(\S\+\s\+\).*/|\1|'
 else
-    printf "${RED}No hidden files found${NC}\n"
+  printf "${RED}No hidden files found${NC}\n"
 fi
+
