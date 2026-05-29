@@ -1,5 +1,5 @@
 #!/bin/dash
-find $1 -mount -iname "$2"
-# For reg expression search comment above and uncomment below
-#find $1 -mount -regex "$2"
+# fd --one-file-system -HIig "$1" "$2"
 
+# For regular expression search, comment above and uncomment below
+fd --one-file-system -HIi --regex "$1" "$2"

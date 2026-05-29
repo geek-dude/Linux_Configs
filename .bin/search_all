@@ -3,3 +3,8 @@ find $1 -iname "$2"
 # For reg expression search comment above and uncomment below
 #find $1 -regex "$2"
 
+#!/bin/dash
+fd -HIig "$1" "$2"
+
+# For regular expression search, comment above and uncomment below
+#fd -HIi --regex "$1" "$2"
