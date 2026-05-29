@@ -9,24 +9,38 @@ NC='\033[0;39m'
 # Default to current directory if no argument
 DIR="${1:-.}"
 
-printf "${GREEN_BOLD}Regular files and folders:${NC}\n"
+print_sizes() {
+  if [ "$#" -gt 0 ]; then
+    du -sch "$@" 2>/dev/null | sed 's|^\([^[:space:]]*[[:space:]]*\).*/|\1|'
+  else
+    printf '%b\n' "${RED}No files found${NC}"
+  fi
+}
 
-set -- "$DIR"/*
+printf '%b\n' "${GREEN_BOLD}Regular files and folders:${NC}"
 
-if [ -e "$1" ]; then
-  du -sch "$@" 2>/dev/null | sed 's|\(\S\+\s\+\).*/|\1|'
+set --
+for item in "$DIR"/*; do
+  [ -e "$item" ] || continue
+  set -- "$@" "$item"
+done
+
+if [ "$#" -gt 0 ]; then
+  print_sizes "$@"
 else
-  printf "${RED}No regular files found${NC}\n"
+  printf '%b\n' "${RED}No regular files found${NC}"
 fi
-du -sch "$DIR"/* 2>/dev/null | sed 's|\(\S\+\s\+\).*/|\1|'
 
-printf "\n${GREEN_BOLD}Hidden files and folders:${NC}\n"
+printf '\n%b\n' "${GREEN_BOLD}Hidden files and folders:${NC}"
 
-set -- "$DIR"/.[!.]* "$DIR"/..?*
+set --
+for item in "$DIR"/.[!.]* "$DIR"/..?*; do
+  [ -e "$item" ] || continue
+  set -- "$@" "$item"
+done
 
-if [ -e "$1" ]; then
-  du -sch "$@" 2>/dev/null | sed 's|\(\S\+\s\+\).*/|\1|'
+if [ "$#" -gt 0 ]; then
+  print_sizes "$@"
 else
-  printf "${RED}No hidden files found${NC}\n"
+  printf '%b\n' "${RED}No hidden files found${NC}"
 fi
-
