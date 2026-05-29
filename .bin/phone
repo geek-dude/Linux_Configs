@@ -1,7 +1,10 @@
 #!/bin/dash
 
 # Replace this with your phone's MAC address
-PHONE_MAC="b2:63:bb:9b:6e:97"
+# PHONE_MAC="66:eb:52:4f:49:37" Sarojini 5G_Ext
+# PHONE_MAC="b2:63:bb:9b:6e:97" -- Sarojini 5G
+# PHONE_MAC="e2:28:ee:97:56:78" -- India
+PHONE_MAC="ee:b3:42:26:b5:e3" -- ACT-ai-107770334787
 
 IP=$(ip neigh | grep -i "$PHONE_MAC" | awk '{print $1}')
 

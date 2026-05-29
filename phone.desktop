@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Phone Mirror
+Comment=Mirrors your phone screen to the desktop using adb over WiFi
+Exec=phone
+# Icon=utilities-terminal
+Icon=/home/keerthi/.icons/Papirus-Dark/16x16/devices/phone-nokia-n900.svg
+Terminal=false
+Categories=Utility;
