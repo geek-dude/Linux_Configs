@@ -45,7 +45,7 @@ if [ -d "$HOME/.local/bin" ] && [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
 fi
 
 #Some environment variables
-export EDITOR="vi"
+export EDITOR="nvim"
 export TERMINAL="alacritty"
 export BROWSER="google-chrome-stable"
 export PAGER="less"
