@@ -98,7 +98,7 @@ export GROFF_NO_SGR=1
 [[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP
 
 # some more ls aliases
-alias ll='ls -alF'
+alias ll='ls -la'
 alias la='ls -A'
 alias l='ls -CF'
 
@@ -130,3 +130,21 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
+# lfcd setup
+# Using fl as function name instead of lfcd to type less.
+# We cannot use lf because it then conflicts with the lf file manager command.
+# Also, it will result in infinite recusrsion in the below function.
+# Also avoid aliasing lf to fl for the same reason mentioned above.
+fl() {
+  tmp="$(mktemp)"
+
+  lf -last-dir-path="$tmp" "$@"
+
+  if [ -f "$tmp" ]; then
+    dir="$(cat "$tmp")"
+    [ -d "$dir" ] && cd "$dir"
+  fi
+
+  rm -f "$tmp"
+}

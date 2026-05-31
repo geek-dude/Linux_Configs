@@ -41,11 +41,22 @@ map O $mimeopen --ask $f
 # This command is called when current file is not a directory. You may want to
 # use either file extensions and/or mime types here. Below uses an editor for
 # text files and a file opener for the rest.
+# You may want to change the pdf, image and video opener commands
+# based on the packages installed on your system.
 cmd open &{{
     case $(file --mime-type -Lb $f) in
         text/*) lf -remote "send $id \$$EDITOR \$fx";;
-        application/pdf) lf -remote "send $id \$okular \$fx";;
-        image/*) lf -remote "send $id \$gwenview \$fx";;
+        application/pdf) lf -remote "send $id \$evince \$fx";;
+        image/*) lf -remote "send $id \$eog \$fx";;
+        video/*) lf -remote "send $id \$vlc \$fx";;
+
+        application/vnd.oasis.opendocument.*|\
+        application/vnd.openxmlformats-officedocument.*|\
+        application/msword|\
+        application/vnd.ms-excel|\
+        application/vnd.ms-powerpoint)
+            lf -remote "send $id \$libreoffice \$fx";;
+
         *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
     esac
 }}
@@ -62,7 +73,14 @@ map a :push %mkdir<space>
 
 # move current file or selected files to trash folder
 # (also see 'man mv' for backup/overwrite options)
-cmd trash %set -f; mv $fx ~/.trash
+# cmd trash %set -f; mv $fx ~/.trash/
+cmd trash ${{
+    set -f
+    printf "$fx\n"
+    printf "trash?[y/n]"
+    read ans
+    [ "$ans" = "y" ] && trash $fx
+}}
 
 # define a custom 'delete' command
 cmd delete ${{
@@ -74,8 +92,8 @@ cmd delete ${{
 }}
 
 # use '<delete>' key for either 'trash' or 'delete' command
-# map <delete> trash
-map <delete> delete
+map <delete> trash
+# map <delete> delete
 
 # extract the current file with the right command
 # (xkcd link: https://xkcd.com/1168/)
@@ -116,3 +134,9 @@ set icons true
 map <a-j> :push :cd<space>
 map <a-n> :push %touch<space>
 map <a-e> :push $nvim<space>
+
+# --- Image preview setup ---
+%[ -x "$HOME/.config/lf/preview_script.sh" ] || printf "lf previewer missing or not executable: %s\n" "$HOME/.config/lf/preview_script.sh"
+set drawbox false
+set preview true
+set previewer ~/.config/lf/preview_script.sh

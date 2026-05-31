@@ -1,6 +1,5 @@
 19/03/2025 google-chrome deb file from website. Also adds ppa.
 20/03/2025 timeshift ppa:teejee2008/timeshift
-20/03/2025 neofetch apt install
 20/03/2025 code deb file from website. Also adds ppa.
 21/03/2025 libreoffice apt install
 24/03/2025 vlc snap install
@@ -15,14 +14,13 @@
 03/04/2025 FiraCode from https://www.nerdfonts.com/font-downloads
 03/04/2025 JetBrainsMono from https://www.nerdfonts.com/font-downloads
 
-	Theme - monokai_charcoal.toml for alacritty and monokai-charcoal (grey) for VS Code
+	Theme - monokai_charcoal.toml for alacritty and monokai-charcoal (grey) for VS Code and Monokai Remastered for WezTerm
 
 12/03/2025 zsh apt install
 14/03/2025 zsh-autosuggestions apt install
 14/03/2025 zsh-syntax-highlighting apt install
 14/03/2025 powerlevel10k git@github.com:romkatv/powerlevel10k.git
 14/03/2025 zsh-you-should-use git@github.com:MichaelAquilina/zsh-you-should-use.git
-14/03/2025 lf apt install
 14/03/2025 curl apt install
 15/03/2025 libxcb-cursor0 apt install - for calibre
 
@@ -59,20 +57,20 @@ Flatpak install
 05/09/2025 texlive-full apt install
 15/09/2025 rpi-imager deb file from website. Doesn't add any ppa, repository or key.
 
-Graphics drivers
+GPU Drivers Stack
 Kernel Level
-	The kernel drivers for both intel and amd gpus are installed by default but amd gpu is using the older radeon driver insteaad of amd gpu. It is changed by setting the kernel parameter in grub and also by creating a modprobe config amdgpu.conf in /etc/modprobe.d
+	The kernel drivers for both intel and amd gpus are installed by default but amd gpu is using the older radeon driver instead of amd gpu. For my current laptop, Dell Inspiron 15-3567, it is not worth switching to the modern amdgpu driver. It introduces a lot unstability. The system hangs on shutdown, restart, logff and suspend. Also, even steam hangs when DRI_PRIME=1. PC building simulator game doesn't even launch either with DRI_PRIME=1 with or without enabling amdgpu. However, it can be enabled sometime in the future, if I end up with a system having a modern AMD GPU by following these instructions. It is changed by setting the kernel parameter in grub and also by creating a modprobe config amdgpu.conf in /etc/modprobe.d
 	# /etc/modprobe.d/amdgpu.conf
 	options amdgpu si_support=1
 	options radeon si_support=0
 	blacklist radeon
 	For the grub config change this line:
 	GRUB_CMDLINE_LINUX_DEFAULT="quiet splash radeon.si_support=0 amdgpu.si_support=1 resume=UUID=ff87c016-14ea-413a-8935-2e9330962c9d"
-Opengl
-	All the opengltools (mesa-utils which provides glxinfo) and drivers for both intel and amd gpu (mesa intel and radeonsi) are installed by default in ubuntu
-Vulkan
+Opengl Level
+	All the opengltools (mesa-utils which provides glxinfo) and drivers for both intel and amd gpu (mesa intel and radeonsi) are installed by default in ubuntu. Note that trying to drive DGPU with amdgpu driver somehow breaks opengl on this gpu.
+Vulkan Level
 	18/09/2025 vulkan-tools apt install (For seeing the vulkan driver info using vulkaninfo)
-	mesa-vulkan-drivers this is a meta package which pulls the vulkan drivers for all your hardware. It is installed by default in ubuntu. (anv (intel) and radv (amd))
+	mesa-vulkan-drivers this is a meta package which pulls the vulkan drivers for all your hardware. It is installed by default in ubuntu. (anv (intel) and radv (amd)). Note that for the DGPU vulkan works only with amdgpu driver but not radeon.
 Opencl
 	18/09/2025 clinfo apt install (For seeing the opencl driver info)
 	18/09/2025 mesa-opencl-icd apt install (opencl driver for amd gpu)
@@ -82,7 +80,7 @@ Opencl
 	However rusticl doesn't select the correct driver unless it is explicitly told to do so with an export variable as follows
 		export RUSTICL_ENABLE=radeonsi So any opencl app that you want to run on amd using rusticl must be launched from the terminal after doing the aforementioned export.
 	On the intel opencl side, there are no issues and it works with neo properly.
-Video acceleration/decoding
+Video acceleration/decoding Level
 	For amd mesa-va-drivers (vaapi support for amd) and mesa-vdpau-drivers (provides vdpau support for both amd and intel) are already installed.
 	For intel intel-media-va-driver (vaapi support for intel) is already installed.
 	18/09/2025 vainfo apt install (This ia video acceleration api and also helps us to see the list of drivers and codes supported with vainfo command)
@@ -91,9 +89,9 @@ Video acceleration/decoding
 GPU usage in chrome and vlc
 	Flags to change in chrome:
 	1) Override software rendering list
-	2) Vulkan - currently doesn't work with intel in wayland. Works just fine with amd. Turn off when using intel gpu but turn on when using amd gpu
+	2) Vulkan - currently doesn't work with intel in wayland. Works just fine with amd. Turn off when using intel gpu but turn on when using amd gpu. In the current PC, the DGPU is anyway not working properly with amdgpu driver which is required for supporting Vulkan so this flag is turend off as of now.
 	3) Hardware-accelerated video decode - enabled by default
-	Use igpu most of the times, except when playing web games or while watching a video streaming service if video is extremely high resolution (>4k) and Intel CPU is bottlenecked.
+	Use igpu most of the times, except when playing heavy web games or while watching a video streaming service if video is extremely high resolution (>4k) and Intel CPU is bottlenecked.
 	Vlc settings
 	1) tools -> preferences -> input/codecs -> Hardware-accelerated decoding = VA-API video decoder (Choose VA-API video decoder via DRM if running with amd gpu)
 	2) tools -? preferences -> video -> output -> OpenGL video output
@@ -139,3 +137,74 @@ Finally this script can be called on boot by adding it to the Ubuntu's autostart
 10/01/2026 zoom deb file from website.
 24/02/2026 guvcview apt install
 16/03/2026 gufw (front gui to ufw, firewall) apt install
+03/04/2026 psensor (For temparature measurement) apt install
+
+07/04/2026 (Swati's birthday) Steam 
+  Installed through the official deb file from the website. Also adds its own repo to apt.
+  While the deb file is being installed, it tries to add around 11 more packages and 10 of them were already installed in my case and hence some of them (usually the 32 bit versions of the libraries/packages) were marked as manually installed. If you uninstalld steam in the future, you may want to mark them as manually installed so that you can remove them with sudo apt purge --autoremove. Those few packages which were mentioned as already installed but not marked as manually installed were probably already set to manually installed. If you want to aggressively, clean up your system, you may want to set them to automatically installed as well in the future when you uninstall steam. Anyway, most of these packages may not be removed with sudo apt purge --autoremove even after being set to automatically installed as they have many reverse dependencies. The entire list of changes can be seen in the file steam_changed_packages.txt
+
+  When it comes to launching steam from either the desktop icon or from the gnome-search (searching by typing the super key), the desktop file, ~/Desktop/steam.desktop works just fine with the Exec line Exec=/usr/bin/steam %U. But the gnome search launching doesn't work fine, at least for my current Dell-Inspiron-15-3567 laptop. Because it tries to access my DGPU which is buggy with steam and hence it needs to be explicitly be forced to use my IGPU with by editing the file /home/keerthi/.local/share/applications/steam.desktop and changing line 37 from PrefersNonDefaultGPU=true to PrefersNonDefaultGPU=false to force the use of IGPU instead of DGPU. Note that changing the same line in the equivalent .desktop file for the desktop shortcut, ~/Desktop/steam.desktop has not effect as it seems to somehow always pick the IGPU by default due to the desktop environment. Alternatively the same can by achieved by changing the Exec line, line 30, to Exec=env DRI_PRIME=0 /usr/bin/steam %U in the same file. In future no such changes maybe required if you use a modern pc with relatively newer AMD gpu that supports the latest GPU kernel driver, AMD driver amdgpu instead of the older radeon.
+
+  As for launching the actual game (PC Building Simulator is the only game that I play on steam at this time), the following launch command is used: gamemoderun vblank_mode=0 %command%   The vblank_mode=0 is for hard disabling vsync at the kernel level to improve input lag (which is not critical for the game that I play anyway). The gamemoderun is to put the cpu in performance mode for the gameplay. Note that if you are debugging when the game doesn't launch and wants to make sure that vulkan on any particular gpu is not the issue, add the variable PROTON_USE_WINE3D=1 to convert the vulkan calls to opengl so that game will at least run with opengl if vulkan is the only issue. This helps in isolating and confirming the issue when the game doesn't launch. Also, please note that on the current PC, Dell-Inspiron-15-3567, the game takes a lot of time to launch so please give it some time to launch before coming to the conclusion that the game is not launching. If you want to confirm that the game is indeed doing something in the background and not silently failing, launch it from the terminal once and you can confirm that steam is doing something by viewing the continuously changing stdout to the terminal.
+
+27/04/2026 fastfetch ppa:zhangsongcui3371/fastfetch
+28/04/2026 btop installed by directly downloading the binary from git and running an install script inside the cloned repo. This will place some files in the following locations
+See https://github.com/aristocratos/btop#installation for instructions
+❯ sudo make install
+
+ ██████╗ ████████╗ ██████╗ ██████╗
+ ██╔══██╗╚══██╔══╝██╔═══██╗██╔══██╗   ██╗    ██╗
+ ██████╔╝   ██║   ██║   ██║██████╔╝ ██████╗██████╗
+ ██╔══██╗   ██║   ██║   ██║██╔═══╝  ╚═██╔═╝╚═██╔═╝
+ ██████╔╝   ██║   ╚██████╔╝██║        ╚═╝    ╚═╝
+ ╚═════╝    ╚═╝    ╚═════╝ ╚═╝      Installer
+
+Installing binary to: /usr/local/bin/btop
+Installing doc to: /usr/local/share/btop
+Installing themes to: /usr/local/share/btop/themes
+Installing desktop entry to: /usr/local/share/applications/btop.desktop
+Installing PNG icon to: /usr/local/share/icons/hicolor/48x48/apps/btop.png
+Installing SVG icon to: /usr/local/share/icons/hicolor/scalable/apps/btop.svg
+
+  ~/Documents/btop ──────────────────────────────────────────────────────────────────────────────────────────────────  11:07:59 AM
+❯ sudo make setcap - This command was run in the hopes of making btop display igpu and cpu wattage but it didn't work.
+File: /usr/local/bin/btop
+Setting capabilities...
+
+  ~/Documents/btop ──────────────────────────────────────────────────────────────────────────────────────────────────  11:22:39 AM
+❯ which btop
+/usr/local/bin/btop
+
+22/05/2026 Neovim (See ChatGPT chat and lazy vim and neovim's official websites for installation instructions)
+	nvim itself is installed by downloadig the official tarball from the website and placed at ~/.local/opt and the binary is symlinked to ~/.local/bin
+	lazy vim kickstarter is cloned from git and placed at ~/.config/nvim
+	Different plugins will require different dependencies which are installed as below:
+	22/05/2026 ripgrep apt install
+	22/05/2026 fd-find apt install (After installing make symlink it as recommended by the offical git repo -> ln -s /usr/bin/fdfind ~/.local/bin/fd)
+	22/05/2026 fzf apt install
+	22/05/2026 xclip apt install
+	22/05/2026 lazygit
+		lazygit is not available in Ubuntu's apt repos for 24.04. It will be available from 26
+		Follow the below instructions from the official GitHub repo (https://github.com/jesseduffield/lazygit). The only change being that the last command is changed to install it my ~/.local/bin instead of /usr/local/bin/
+      LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
+      LAZYGIT_ARCH=$(uname -m | sed -e 's/aarch64/arm64/')
+      curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_${LAZYGIT_ARCH}.tar.gz" (Please note that the tar is downloaded to ~/.local/opt/ where it still remains along with neovim's tar too)
+      tar xf lazygit.tar.gz lazygit
+      install lazygit -D -t ~/.local/bin/
+  25/05/2026 npm
+    npm and nodejs are required for the python lsp server pyright and also by ai.copilot. nmp is required for installing some plugins such as these two through mason and nodejs is required for actually running the server. While installing npm through apt is sufficient for the pyright plugin, it is not sufficient for ai.copilot as it requires npm version 9 or above and the npm version in apt is 8. So I have installed npm and nodejs through nvm (node version manager) which is a tool to manage multiple versions of nodejs and npm on the same system. The installation instructions are followed from the official nvm repo (https://github.com/nvm-sh/nvm). You just need download the install script from that repo and run it. The script will download the binary to ~/.nvm and edit your .zshrc or .bashrc to add the binary and autocompletion options to the shell. After that the latest lts version of nodejs and npm can be installed with the following command:
+    nvm install --lts
+
+27/05/2026 input-remapper apt install
+29/05/2026 trash-cli apt install (Required for providing move to recycle bin functionality to lf file manager)
+
+30/05/2026 lf file manager
+  Note that as of writing this document, the lf available through Ubuntu 24.04's apt repo is older, version 31 which doesn't properly support sixel image preview. So I had to manually download the latest binary, version r41  as of Feb 4 2026, from the official repo: https://github.com/gokcehan/lf/releases   The binary is placed in ~/.local/bin
+  Dependencies required according to https://github.com/thimc/lfimg/tree/master: No need to install every single dependency mentioned this link. I just ensured that few things that I need for the types of file previews that I want to see in lf
+    30/05/2026 chafa apt install - for basic image preview through sixel in a sixel supported terminal such as WezTerm.
+    Although it is installed by default in Ubuntu 24.04, for some reason on this date,
+    I noticed that it is uninstalled and reinstalled it manually. BTW, Alacritty doesn't support sixel. 
+    30/05/2026 ffmpegthumbnailer apt install - required for image previews for videos.
+    imagemagick apt install - required for svg image previews. (Installed by default on Ubuntu 24.04)
+    30/05/2026 poppler-utils apt install - required for pdf image previews.
+  To have lfcd functionality (change PWD to the last used directory on lf), a small function called fl is added to both .zshrc and .bashrc.
