@@ -1,0 +1,33 @@
+# Upgrade everything before doing anything else:
+sudo dnf upgrade --refresh
+
+# First we will focus on setting up the shell environment, zsh and bash
+# Installing some packages and cloning relavent repos:
+cd
+sudo dnf install git zsh-syntax-highlighting zsh-autosuggestions
+git clone https://github.com/geek-dude/Linux_Configs.git
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+git clone https://github.com/MichaelAquilina/zsh-you-should-use.git
+# Switching to an older version of zsh-you-should-use as the latest version is not working properly.
+cd zsh-you-should-use
+git checkout 1.9.0
+cd
+
+# First rename the existing .bashrc and .zshrc as they are going to be overwritten by the symlinks from the repo.
+# The user can manually restore them if something doesn't work.
+# We want to avoid the situation where we don't have any working .config files.
+mv .zshrc .zshrc_backup
+mv .bashrc .bashrc_backup
+mv .zprofile .zprofile_backup
+mv .bash_profile .bash_profile_backup
+
+ln -s ~/Linux_Configs/container/.bash_profile ~/.bash_profile
+ln -s ~/Linux_Configs/container/.bashrc ~/.bashrc
+ln -s ~/Linux_Configs/.bash_aliases ~/
+ln -s ~/Linux_Configs/container/.zshenv ~/.zshenv
+ln -s ~/Linux_Configs/container/.zshrc ~/.zshrc
+ln -s ~/Linux_Configs/.zsh_aliases ~/.zsh_aliases
+ln -s ~/Linux_Configs/.dircolors ~/
+ln -s ~/Linux_Configs/.LESS_TERMCAP ~/
+ln -s ~/Linux_Configs/.bin ~/
+ln -s ~/Linux_Configs/.system_scripts ~/

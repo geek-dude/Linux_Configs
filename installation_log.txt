@@ -208,3 +208,5 @@ Setting capabilities...
     imagemagick apt install - required for svg image previews. (Installed by default on Ubuntu 24.04)
     30/05/2026 poppler-utils apt install - required for pdf image previews.
   To have lfcd functionality (change PWD to the last used directory on lf), a small function called fl is added to both .zshrc and .bashrc.
+
+01/06/2026 docker-buildx apt install - required to build docker images

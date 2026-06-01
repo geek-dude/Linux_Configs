@@ -1,0 +1,29 @@
+# Linux_Configs/container/Containerfile
+FROM fedora:latest
+
+LABEL org.opencontainers.image.title="Fedora shell environment"
+LABEL org.opencontainers.image.description="Fedora-based Distrobox image for bash, zsh, Powerlevel10k, and personal shell scripts"
+LABEL org.opencontainers.image.source="https://github.com/geek-dude/Linux_Configs"
+
+RUN dnf upgrade --refresh -y && \
+    dnf install -y \
+        bash \
+        git \
+        zsh \
+        zsh-syntax-highlighting \
+        zsh-autosuggestions \
+        findutils \
+        coreutils \
+        less \
+        util-linux \
+        procps-ng \
+        hostname \
+        shadow-utils \
+        sudo \
+        which && \
+    dnf clean all
+
+COPY setup-shell-env.sh /usr/local/bin/setup-shell-env
+RUN chmod +x /usr/local/bin/setup-shell-env
+
+CMD ["/usr/bin/zsh"]
