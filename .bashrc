@@ -127,11 +127,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# NVM Setup
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-
 # lfcd setup
 # Using fl as function name instead of lfcd to type less.
 # We cannot use lf because it then conflicts with the lf file manager command.
@@ -149,3 +144,8 @@ fl() {
 
   rm -f "$tmp"
 }
+
+# NVM Setup
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
