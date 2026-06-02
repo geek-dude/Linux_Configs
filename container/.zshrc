@@ -95,7 +95,7 @@ export EDITOR="nvim"
 # export BROWSER="google-chrome-stable"
 
 # Powerlevel10k theme prompt
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+source ~/Documents/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -107,4 +107,10 @@ source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Alias suggestions
-source ~/zsh-you-should-use/zsh-you-should-use.plugin.zsh
+source ~/Documents/zsh-you-should-use/zsh-you-should-use.plugin.zsh
+
+# In Distrobox, always start interactive shells from the container home.
+# Avoid doing this in .zshenv because .zshenv is sourced by every zsh process.
+if [[ -o interactive ]]; then
+  cd "$HOME"
+fi

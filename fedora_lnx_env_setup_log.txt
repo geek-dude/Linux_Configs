@@ -1,16 +1,27 @@
 # Upgrade everything before doing anything else:
 sudo dnf upgrade --refresh
+# Unsetting CA certificates which causes issue with curl and later with neovim.
+# Doing the below step seems to be sufficient as ca-certificates are already installed by default
+unset SSL_CERT_FILE CURL_CA_BUNDLE REQUESTS_CA_BUNDLE
 
 # First we will focus on setting up the shell environment, zsh and bash
 # Installing some packages and cloning relavent repos:
+mkdir -p ~/Documents
 cd
-sudo dnf install git zsh-syntax-highlighting zsh-autosuggestions
+sudo dnf install git zsh-syntax-highlighting zsh-autosuggestions dash fd-find gcc-c++ ripgrep fzf wl-clipboard xclip
+cd ~/Documents
 git clone https://github.com/geek-dude/Linux_Configs.git
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
 git clone https://github.com/MichaelAquilina/zsh-you-should-use.git
 # Switching to an older version of zsh-you-should-use as the latest version is not working properly.
-cd zsh-you-should-use
+cd ~/Documents/zsh-you-should-use
 git checkout 1.9.0
+mkdir -p ~/.config
+mkdir -p ~/.local/bin
+mkdir -p ~/.local/opt
+cd ~/.local/opt
+curl -OL "https://github.com/neovim/neovim/releases/download/v0.12.2/nvim-linux-x86_64.tar.gz"
+tar xf nvim-linux-x86_64.tar.gz
 cd
 
 # First rename the existing .bashrc and .zshrc as they are going to be overwritten by the symlinks from the repo.
@@ -31,3 +42,5 @@ ln -s ~/Linux_Configs/.dircolors ~/
 ln -s ~/Linux_Configs/.LESS_TERMCAP ~/
 ln -s ~/Linux_Configs/.bin ~/
 ln -s ~/Linux_Configs/.system_scripts ~/
+ln -s ~/Linux_Configs/nvim ~/.config/
+ln -s ~/.local/opt/nvim-linux-x86_64/bin/nvim ~/.local/bin/
