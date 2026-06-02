@@ -6,7 +6,8 @@
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
+    # alias ls='ls --color=auto'
+    alias ls='lsd'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
@@ -50,3 +51,9 @@ export EDITOR="nvim"
 # export BROWSER="google-chrome-stable"
 export PAGER="less"
 #export WM="qtile"
+
+# Avoid host/container CA certificate path leakage.
+# This fixes curl and Neovim plugin download issues inside Distrobox.
+unset SSL_CERT_FILE
+unset CURL_CA_BUNDLE
+unset REQUESTS_CA_BUNDLE

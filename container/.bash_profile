@@ -20,3 +20,9 @@ fi
 if [ -d "$HOME/.bin" ] && [[ ":$PATH:" != *":$HOME/.bin:"* ]]; then
   PATH="$HOME/.bin:$PATH"
 fi
+
+# Avoid host/container CA certificate path leakage.
+# This fixes curl and Neovim plugin download issues inside Distrobox.
+unset SSL_CERT_FILE
+unset CURL_CA_BUNDLE
+unset REQUESTS_CA_BUNDLE
