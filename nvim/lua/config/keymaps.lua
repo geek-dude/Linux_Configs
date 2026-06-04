@@ -43,3 +43,26 @@ vim.keymap.set("t", "<C-/>", [[<C-\><C-n><cmd>lua toggle_terminal_buffer()<cr>]]
 vim.keymap.set("t", "<C-_>", [[<C-\><C-n><cmd>lua toggle_terminal_buffer()<cr>]], {
   desc = "Toggle terminal buffer",
 })
+
+-- Browse files from an arbitrary directory without changing Neovim's cwd
+vim.keymap.set("n", "<leader>fj", function()
+  vim.ui.input({
+    prompt = "Browse directory: ",
+    default = vim.fn.expand("~/"),
+    completion = "dir",
+  }, function(input)
+    if not input or input == "" then
+      return
+    end
+
+    local dir = vim.fn.expand(input)
+    if vim.fn.isdirectory(dir) == 0 then
+      vim.notify("Not a directory: " .. dir, vim.log.levels.ERROR)
+      return
+    end
+
+    Snacks.picker.files({
+      cwd = dir,
+    })
+  end)
+end, { desc = "Find files in directory" })
