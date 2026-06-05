@@ -9,7 +9,7 @@
 02/04/2025 Alacritty
 	Followed the installation instructions at the following link:
 	https://github.com/alacritty/alacritty/blob/master/INSTALL.md
-	All the install instructions and cargo are unistalled after successful installation of alacritty
+	All the installation instructions are undone and cargo are uninstalled after successful installation of alacritty
 03/04/2025 CaskaydiaCoveNerdFont from https://www.nerdfonts.com/font-downloads
 03/04/2025 FiraCode from https://www.nerdfonts.com/font-downloads
 03/04/2025 JetBrainsMono from https://www.nerdfonts.com/font-downloads
