@@ -44,20 +44,31 @@ map O $mimeopen --ask $f
 # You may want to change the pdf, image and video opener commands
 # based on the packages installed on your system.
 cmd open &{{
-    case $(file --mime-type -Lb $f) in
-        text/*) lf -remote "send $id \$$EDITOR \$fx";;
-        application/pdf) lf -remote "send $id \$evince \$fx";;
-        image/*) lf -remote "send $id \$eog \$fx";;
-        video/*) lf -remote "send $id \$vlc \$fx";;
-
+    case $(file --mime-type -Lb "$f") in
+        text/*)
+            lf -remote "send $id \$$EDITOR \$fx"
+            ;;
+        application/pdf)
+            setsid -f evince $fx >/dev/null 2>&1
+            ;;
+        image/*)
+            setsid -f eog $fx >/dev/null 2>&1
+            ;;
+        video/*)
+            setsid -f vlc $fx >/dev/null 2>&1
+            ;;
         application/vnd.oasis.opendocument.*|\
         application/vnd.openxmlformats-officedocument.*|\
         application/msword|\
         application/vnd.ms-excel|\
         application/vnd.ms-powerpoint)
-            lf -remote "send $id \$libreoffice \$fx";;
-
-        *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
+            setsid -f libreoffice $fx >/dev/null 2>&1
+            ;;
+        *)
+            for f in $fx; do
+                setsid -f "$OPENER" "$f" >/dev/null 2>&1
+            done
+            ;;
     esac
 }}
 
