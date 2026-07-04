@@ -210,3 +210,8 @@ Setting capabilities...
   To have lfcd functionality (change PWD to the last used directory on lf), a small function called fl is added to both .zshrc and .bashrc.
 
 01/06/2026 docker-buildx apt install - required to build docker images
+
+13/06/2026 Virtual machine setup
+  13/06/2026 virt-manager apt install
+  qemu-kvm already installed (On Ubuntu the package name is qemu-system-x86)
+  After installing the above two, add yourself to the kvm group and once log out and log back in for the group changes to take effect. And before everytime you start virt-manager, you will have to first start the libvirtd.service first.

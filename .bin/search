@@ -1,5 +1,5 @@
 #!/bin/dash
-# fd --one-file-system -HIig "$1" "$2"
+fd --one-file-system -HIig "$1" "$2"
 
 # For regular expression search, comment above and uncomment below
-fd --one-file-system -HIi --regex "$1" "$2"
+# fd --one-file-system -HIi --regex "$1" "$2"

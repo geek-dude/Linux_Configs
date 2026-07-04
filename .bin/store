@@ -1,2 +1,2 @@
 #!/bin/dash
-rsync -nvhiLruyPtz --stats $1 localhost:$2
+rsync -nvhirtLPuy --stats "$1" "localhost:$2"
