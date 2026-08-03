@@ -1,3 +1,4 @@
 # ignoring the nvim lazy plugin database file
 lazy-lock.json
 .private_configs/
+Remote_Lab_Machine_Configs/
