@@ -217,3 +217,4 @@ Setting capabilities...
   After installing the above two, add yourself to the kvm group and once log out and log back in for the group changes to take effect. And before everytime you start virt-manager, you will have to first start the libvirtd.service first.
 
 17/07/2026 obs-studio ppa:obsproject/obs-studio
+03/08/2026 lsd apt install
