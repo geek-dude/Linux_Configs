@@ -218,3 +218,5 @@ Setting capabilities...
 
 17/07/2026 obs-studio ppa:obsproject/obs-studio
 03/08/2026 lsd apt install
+19/08/2026 ttf-mscorefonts-installer apt install - for microsoft fonts (Ariel, Times New Roman)
+19/08/2026 fonts-crosextra-carlito apt install - for Calibre fonts (Already installed for Libreoffice and texlive. Set to manual installed)
