@@ -221,3 +221,8 @@ Setting capabilities...
 19/08/2026 ttf-mscorefonts-installer apt install - for microsoft fonts (Ariel, Times New Roman)
 19/08/2026 fonts-crosextra-carlito apt install - for Calibre fonts (Already installed for Libreoffice and texlive.)
 20/09/2026 chatgpt deb file from website (https://chatgpt.com/codex/). Also adds ppa.
+31/10/2026 WezTerm
+  Follow the instructions on the official website (https://wezterm.org/install/linux.html) mentioned below:
+  curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /usr/share/keyrings/wezterm-fury.gpg
+  echo 'deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
+  sudo chmod 644 /usr/share/keyrings/wezterm-fury.gpg
